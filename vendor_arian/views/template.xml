@@ -1,0 +1,22 @@
+<?xml version="1.0"?> 
+<odoo>
+    
+    <record id="vendor_form_view_extension" model="ir.ui.view"> 
+        <field name="name">vendor_form_view_extension</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name ='category_id']" position="before">
+
+                <field name="vendor_ref_no"/>
+                <field name="ntn"/>
+
+            </xpath>
+
+        </field>
+
+    </record>
+
+</odoo> 

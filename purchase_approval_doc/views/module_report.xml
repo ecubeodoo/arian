@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="purchase_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="d">
+                        
+                        <div class="page">
+                            
+                            <style>
+                                table {
+                                    width: 100%;
+                                    border-top: 2px solid #000;
+                                    margin: 20px 0px 0px;
+                                    float: left;
+                                }
+                                table tr th,
+                                table tr td {
+                                    border-bottom: 2px solid #000;
+                                    border-left: 2px solid #000;
+                                    padding: 5px;
+                                    text-align: center;
+                                }
+                                table tr th:last-child,
+                                table tr td:last-child {
+                                    border-right: 2px solid #000;
+                                }
+                                .table-head {
+                                    text-align: center;
+                                    color: #FFF;
+                                    background: #666;
+                                }
+                                table table {
+                                    border: none;
+                                }
+                                table table tr td {
+                                    border: none !important;
+                                }
+                                .green
+                                {
+                                 background-color:#92d050;"                                
+                                }
+                                .yellow
+                                {
+                                 background-color:#ffff00;                                 
+                                }
+
+                            </style>
+            
+                            <div class="report-container">
+                            <table>
+                                <tr>
+                                    <th colspan="2"></th>
+                                    <th colspan="2">MO/116,119,120/15              BILT </th>
+                                    <th>123</th>
+                                    <th>456</th>
+                                    <th>789</th>
+                                    <th></th>
+                                    <th>147</th>
+                                    <th></th>
+
+                                </tr>
+
+                                <tr>
+                                    <td>DESCRIPTION</td>
+                                    <td>UOM</td>
+                                    <td>REQUIRED QTY</td>
+                                    <td>AVAILABLE</td>
+                                    <td class ="yellow">DEMAND</td>
+                                    <td class ="green">TO ORDER</td>
+                                    <td class ="green">RATE</td>
+                                    <td class ="green">TOTAL AMOUNT</td>
+                                    <td class ="green">CASH/CREDIT</td>
+                                    <td class ="green">VENDOR</td>
+                                </tr>
+                                <t t-foreach="d.purchase_requisition_tree_link" t-as="o">
+                                    <tr>
+                                        <td><span t-esc="o.material_name.name"> </span></td>    
+                                        <td><span t-esc="o.uom.name"></span></td>    
+                                        <td><span t-esc="o.required_quantity"></span></td>    
+                                        <td><span t-esc="o.available_quantity"></span></td>
+                                        <td class ="yellow"><span t-esc="o.balance_quantity"></span></td>
+                                        <td class ="green"><span t-esc="o.qty_order"></span></td>
+                                        <td class ="green"><span t-esc="o.rate"></span></td>
+                                        <td class ="green"><span t-esc="o.qty_order * o.rate"></span></td>
+                                        <td class ="green"><span t-esc="o.p_terms"></span></td>
+                                        <td class ="green"><span t-esc="o.vendor.name"></span></td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="7"> CREDIT </td>
+                                    <td><span t-esc="credit"></span></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7"> CASH </td>
+                                    <td><span t-esc="cash"></span></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </table>
+                            </div> 
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="demand_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <style>
+                                .main-container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .store{
+                                    width: 100%;
+                                    margin-top: 10px;
+                                }
+                                .store p{
+                                    text-align: right;
+                                    margin: 0px auto;
+                                }
+                                .demand{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    background-color: black;
+                                    color: white;    
+                                    text-align: center;
+                                    font-size: 30px;
+
+                                }
+                                .department{
+                                    width: 100%;
+                                    margin: 0px auto;
+
+
+                                }
+                                .purpose{
+                                    width: 33%;
+                                    float: left;
+                                    text-decoration: underline;
+                                    font-size: 15px;
+                                }
+                                .style{
+                                    width: 33%;
+                                    float: left;
+                                    text-decoration: underline;
+                                    font-size: 15px;
+                                }
+                                .serial{
+                                    width: 33%;
+                                    float: left;
+                                    text-decoration: underline;
+                                    font-size: 15px;
+                                }
+                                .clearfloat{
+                                    clear: both;
+                                    float: none;
+                                }
+                                table th {
+                                        border: 1px solid black;
+                                        border-collapse: collapse;
+                                        text-align: center;
+                                     
+                                }
+                                table  td {
+                                    border: 1px solid black;
+                                    text-align: center; 
+                                    margin-top: 10px;
+
+                                }
+                                .pakistan{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .issued{
+                                    width: 33%;
+                                    float: left;
+                                    margin-top: 60px;
+                                    font-size: 25px;
+                                }
+                                .approved{
+                                    width: 33%;
+                                    float: left;
+                                    margin-top: 60px;
+                                    font-size: 25px;
+                                }
+                                
+                                .keeper{
+                                    width: 15%;
+                                    float: right;
+                                    margin-top: 60px;
+                                    font-size: 25px;
+                                    }
+                                
+                            </style>
+                             <div class="main-container">
+                                <div class="center-container">
+                                    <div class="store">
+                                        <p>Store Copy</p>
+                                        <p>Dept Copy</p>
+                                    </div>
+                                    <div class="demand">
+                                        <p>DEMAND NOTE</p>
+                                    </div>
+                                    <div class="department">
+                                            <div class="purpose">
+
+                                                <p> 
+                                                    <span>Request Dept </span>
+                                                    <span t-esc="o.req_dep"></span>
+                                                </p>
+                                                <p> 
+                                                    <span>Purpose</span>
+                                                    <span t-esc="o.purpose"></span>
+                                                </p>
+                                                <p> 
+                                                    <span>Against MO</span>
+                                                    <span t-esc="o.mo_no"></span>
+                                                </p>
+
+                                            </div>
+
+                                            <div class="style">                                     
+                                                <p> 
+                                                    <span>Style</span>
+                                                    <span></span>
+                                                </p>
+
+                                                <p>
+                                                    <span>Date</span>
+                                                    <span t-esc="o.dm_date"></span>
+                                                </p>
+
+                                                <p>
+                                                    <span>User</span>
+                                                    <span t-esc="o.user"></span>
+                                                </p>
+
+                                            </div>
+
+                                            <div class="serial">
+
+                                                <p>
+                                                    <span>Serial#</span>
+                                                    <span t-esc="dm"></span>
+                                                </p>
+
+                                                <p>
+                                                    <span>Trx#</span>
+                                                    <span ></span>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    <br class="clear float"/>
+                                    <table width="100%">
+                                        <tr>
+                                            <th>S#</th>
+                                            <th>Item Code</th>
+                                            <th>Item Description</th>
+                                            <th>Units</th>
+                                            <th>Requisite Qty</th>
+                                            <th>Issued Qty</th>
+                                            <th>Issuing Date</th>
+                                            <th>Remarks</th>
+                                            
+                                        </tr>
+                                        <t t-foreach="o.demand_note_tree_link" t-as="data">
+                                            <tr>
+                                                <td t-esc="data.serial_no"></td>
+                                                <td t-esc="data.material_id"></td>
+                                                <td t-esc="data.item_desc.name"></td>
+                                                <td t-esc="data.uom.name"></td>
+                                                <td t-esc="data.requisite_quantity"></td>
+                                                <td t-esc="data.issued_quantity"></td>
+                                                <td t-esc="o.dm_date"></td>
+                                                <td t-esc="data.remarks"></td>
+
+                                            </tr>
+                                        </t>
+                                    </table>
+                                    <div class="pakistan">
+                                        <div class="issued">
+                                            <p>Issued by</p>
+                                        </div>
+                                        <div class="approved">
+                                            <p>Approved by</p>
+                                        </div>
+                                        <div class="keeper">
+                                            <p>Storekeeper</p>
+                                        </div>
+                                    </div>
+                                        
+                                    </div>
+                                </div>
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

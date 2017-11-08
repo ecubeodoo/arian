@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+    
+                            <style>
+                                .header,
+                                .footer {
+                                    display: none;
+                                }
+                                .main_header {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .report-header {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 0px 0px 8px;
+                                }
+                                .header-col-01{
+                                    width: 100%;
+                                    min-height: 110px;
+                                    float: left;
+                                    border: 2px solid #000;
+                                    padding: 10px 15px;
+                                    margin: 0px 1px;
+                                }
+                                .clearfloat {
+                                    clear: both;
+                                    float: none;
+                                    display: block;
+                                }
+                                .logo {
+                                    width: 150px;
+                                    height: auto;
+                                    float: left;
+                                }
+                                .logo img {
+                                    width: 100%;
+                                }
+                                .logo-text {
+                                    margin: 0px 0px 0px 598px;
+                                    float: left;
+                                }
+                                .logo-text p {
+                                    margin: 5px 0px;
+                                }
+                                .header-col-02 p {
+                                    margin: 5px 0px;
+                                }
+                                .tower {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 0px 0px 2px
+                                }
+                                .two-col-01, 
+                                .two-col-02 {
+                                    width: 247.7px;
+                                    height: 55px;
+                                    border: 2px solid #000;
+                                    float: left;
+                                    margin: 1px 1px;
+                                    padding: 7px 10px;
+                                }
+                                .two-col-022 {
+                                    width: 331px;
+                                    height: 85px;
+                                    border: 2px solid #000;
+                                    float: left;
+                                    margin: 1px 1px;
+                                    padding: 7px 10px;
+                                }
+                                .two-col-011 {
+                                    width: 498px;
+                                    height: 55px;
+                                    border: 2px solid #000;
+                                    float: left;
+                                    margin: 1px 1px;
+                                    padding: 7px 10px;
+                                }
+                                
+                                .tower p {
+                                    margin: 0px;
+                                }
+                                table {
+                                    width: 106%;
+                                    border-top: 2px solid #000;
+                                    margin: 20px 0px 0px;
+                                    float: left;
+                                }
+                                table tr th,
+                                table tr td {
+                                    border-bottom: 2px solid #000;
+                                    border-left: 2px solid #000;
+                                    padding: 5px;
+                                    text-align: center;
+                                    min-width: 100px;
+                                }
+                                table tr th:last-child,
+                                table tr td:last-child {
+                                    border-right: 2px solid #000;
+                                }
+                                
+                                .table-head {
+                                    text-align: center;
+                                    color: #FFF;
+                                    background: #666;
+                                }
+                                table table {
+                                    border: none;
+                                }
+                                table table tr td {
+                                    border: none !important;
+                                }
+                                .l_div{
+                                    text-align: left;
+                                    float: left;
+                                    text-weight: bold;
+                                    
+                                }
+
+                                .r_div{
+                                    text-align: right;
+                                    float: right;
+                                    text-weight: bold;
+                                }
+
+                                .h2{
+
+                                text-align:center;
+                                background-color:black;
+                                color:white;
+                                margin: 0px 0px 6px 0px;
+                                }
+
+                                .f2{
+
+                                text-align:center;
+                                width: 106%;
+                                background-color:black;
+                                color:white;
+                                margin: 0px 0px 2px 0px;
+                                }
+
+                            </style>
+
+                            <div class="main_header">
+
+                                <div class="report-header">
+                                    
+                                    <div class="header-col-01">
+                                       
+                                        <div class="logo">
+                                            <img src="/custom_invoice_arian/static/src/img/logo.jpg" alt="" />
+                                        </div>
+
+                                        <div class="logo-text">
+
+                                            <p><b>Arian Sports (Pvt) Ltd Customer</b></p>
+                                            <p><b>1Km off Naul More Roras Road</b></p>
+                                            <p><b>Sialkot Pakistan</b></p>
+                                            <b><p>Phone#:-92 52 3612 819</p>  
+                                            <p>E-Mail: export@ariansports.com</p></b>
+                                            
+                                        </div>
+
+                                    </div><!--end of header col 01-->
+
+                                </div><!--end of header-->
+
+                                <div class="tower">
+                                    <h2 class="h2">COMMERCIAL INVOICE</h2>
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>INVOICE NO : </b></span> <span class="liquid" t-esc="o.number" ></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>DATE : </b></span> <span class="liquid"  t-esc="o.date_invoice"></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>FORM E # : </b></span> <span class="liquid"  t-esc="o.e_form_no"></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>FORM E DATE : </b></span> 
+                                        <span class="liquid"  t-esc="o.form_e_date"></span>
+                                        </p>
+
+                                    </div>
+
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>ORDER NO :</b></span> <span class="liquid"  t-esc="o.customer_order_no"></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>TERM OF SHIPMENT :</b></span> <span class="liquid"  >Miss</span></p>
+
+                                    </div>
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>HAWB :</b></span> <span class="liquid" t-esc="o.hawb_no"> </span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>MAWB : </b></span> <span class="liquid" t-esc="o.mawb_no"> </span></p>
+
+                                    </div>
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>DATED: </b></span> <span class="liquid" t-esc="o.confirmation_date"></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>MODE OF PAYMENT</b></span> <span class="liquid" t-esc="o.inco_terms.name"> </span></p>
+
+                                    </div>
+                                    <div class="two-col-01">
+
+                                        <p><span class="solid"><b>TOTAL NO OF CTNS:  </b></span> <span class="liquid"  t-esc="o.no_of_cartons"></span></p>
+
+                                    </div>
+
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>PORT OF DISCHARGE:</b></span> <span class="liquid"  t-esc="o.port"></span></p>
+
+                                    </div>
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>IRREVOCABLE :</b></span> <span class="liquid" >Miss</span></p>
+
+                                    </div>
+                                    <div class="two-col-02">
+
+                                        <p><span class="solid"><b>SHIPMENT:</b></span> <span class="liquid" t-esc="o.partial_shipment"></span></p>
+
+                                    </div>
+                                    <div class="two-col-011">
+
+                                        <p><span class="solid"><b>Date of Issue of Documentary Cridit Number  :</b></span> <span class="liquid" t-esc="o.cn_date" ></span></p>
+
+                                    </div>
+                                    <div class="two-col-022">
+
+                                      <p><span class="solid"><b>APPLICANT:</b></span> <span class="liquid" t-esc="o.partner_id.name"></span>
+                                        <span class="liquid" t-esc="o.partner_id.street"></span>
+                                        <span class="liquid" t-esc="o.partner_id.country_id.name"></span>
+
+                                    </p>
+
+                                    </div>
+
+                                    <div class="two-col-022">
+
+                                        <p><span class="solid"><b>DESCRIPTN OF GOODS /OR SERVICES</b></span> <span class="liquid"  t-esc="o.description"></span></p>
+
+                                    </div>
+                                    <div class="two-col-022">
+
+                                        <p><span class="solid"><b>DOCUMENTARY CREDIT NUMBER:</b></span> <span class="liquid"  t-esc="o.cn"></span></p>
+
+                                    </div>
+                                    
+                                </div>
+
+                            </div><!--end of tower-->
+
+                            <span t-esc="getsizes(o.invoice_line_ids)"></span>
+                            <t t-set="cols" t-value="colsizes()" />
+                            <t t-set="first_size" t-value="3 + colsizes()" />
+                            <t t-set="second_size" t-value="2 + colsizes()" />
+
+                           <table cellspacing='0'>
+
+                                <tr>
+                                    <th colspan="3" >PMD 13150</th>
+                                    <th t-att-colspan="first_size"></th>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="2" >CTN NO.</th>
+                                    <th rowspan="2">STYLE</th>
+                                    <th rowspan="2">COLOR</th>
+                                    <th t-att-colspan="cols">Sizes</th>
+                                    <th rowspan="2" >QTY</th>
+                                    <th rowspan="2">Price US$<br/>(US DOLLOR)</th>
+                                    <th rowspan="2">TOTAL AMOUNT<br/>(US $)</th>
+                                </tr>
+
+                                <tr style= "font-weight:bold">    
+                                    <t t-foreach="size_list" t-as="p">
+                                        <th><span t-esc="p"></span></th>
+                                    </t>
+                                </tr>
+                                <t t-set="total_qty" t-value="0" />
+                                <t t-foreach="o.invoice_line_ids" t-as="data">
+                                <t t-set="total_qty" t-value="total_qty + data.quantity" />
+                                <t t-set="cart" t-value="data.product_id.id" />
+
+                                    <tr style= "font-weight:bold">
+                                        <td></td>
+                                        <td><span t-esc="data.product_id.product_tmpl_id.style_no"></span></td>
+                                        <td><span t-esc="get_value(cart,'color')"></span></td>
+                                        <t t-set="qty" t-value="data.quantity" />
+                                        <t t-set="current_size" t-value="get_name(data)" />
+                                        <t t-foreach="size_list" t-as="q">
+                                            <t t-if="current_size == q">
+                                                <td><span t-esc="data.quantity"></span></td>
+                                            </t>
+                                            <t t-if="current_size != q">
+                                                <td><span> - </span></td>
+                                            </t>
+                                        </t>
+                                        <td><span t-esc="data.quantity"></span></td>
+                                        <td><span t-esc="data.price_unit"></span></td>
+                                        <td><span t-esc="data.quantity * data.price_unit"></span></td>
+                                    </tr>
+                                </t>
+
+                                <tr style= "font-weight:bold">
+                                    <td t-att-colspan="first_size"></td>
+                                    <td colspan="2">Deduction of Air Freight</td>
+                                    <td><span t-esc="o.air_freight"></span></td>
+
+                                </tr>
+                                <tr style= "font-weight:bold">
+                                    <td colspan="3"></td>
+                                    <td t-att-colspan="second_size">TOTAL <span t-esc="o.inco_terms.name"> </span> PAKISTAN VALUE IN USD</td>
+                                    <td><span t-esc="o.amount_total - o.air_freight"> </span></td>
+
+                                </tr>
+                                <tr style= "font-weight:bold">
+                                    <td colspan="3">Amount in Words: USD</td>
+                                    <td t-att-colspan="first_size"><span t-esc="o.convert_amount()"> </span></td>
+
+                                </tr>
+
+                            </table> 
+                            <br class="clearfloat"/>
+                            
+                            <b>
+                                <p style="padding-top:100px"><span>Total No of Pairs:  </span>
+                                <span t-esc="total_qty"></span>
+                                </p>
+                                <p><span>Total No of Ctns:  </span>
+                                <span  t-esc="o.no_of_cartons"></span>
+                                </p>
+                                <p><span>Total Net Wt(Kgs):  </span><span t-esc="o.net_weight"></span></p>
+                                <p><span>Total Gr.Wt(Kgs):  </span><span t-esc="o.gross_weight"></span></p>
+                                <p style="padding-bottom:50px"><span>CBM:  </span><span t-esc="o.volume"></span></p>
+                            </b>
+                            <b>
+                                <div style="text-align:center;margin: 0px 0px 2px 0px;border:1px">Make all checks payable to M/S ARIAN SPORTS (PVT) LTD--- Thank you for your business!</div>
+                                <p class="f2">1 KM OFF NAUL MORE RORAS ROAD, SIALKOT -51310 PUNJAB - PAKISTAN<br/>PHONE#:-92 52 3612 819  EMAIL: export@ariansports.com</p>
+                            </b>
+
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

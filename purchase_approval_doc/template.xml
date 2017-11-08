@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="purchase_approval_doc" 
+            model="purchase.requisition"
+            name="purchase_approval_doc.purchase_report"
+            file="purchase_approval_doc.purchase_report"
+            report_type="qweb-html"
+            string="Purchase Approval Doc"/> 
+    </data>
+</openerp>

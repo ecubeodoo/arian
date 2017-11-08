@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="demand_note" 
+            model="demand.note"
+            name="demand_note.demand_report"
+            file="demand_note.demand_report"
+            report_type="qweb-html"
+            string="Demand Note Report"/> 
+    </data>
+</openerp>

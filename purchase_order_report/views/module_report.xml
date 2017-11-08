@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+	<data>   
+
+		<template id="module_report">
+
+			<t t-call="report.html_container">
+				<t t-call="report.external_layout">
+					<t t-foreach="docs" t-as="o">
+
+						<div class="page">
+	
+							<style>
+
+								.main_header {
+									width: 1000px;
+									margin: 0px auto;
+								}
+								.report-header {
+									width: 100%;
+									float: left;
+									margin: 0px 0px 8px;
+								}
+								.header-col-01{
+									width: 100%;
+									min-height: 110px;
+									float: left;
+									border: 2px solid #000;
+									padding: 10px 15px;
+									margin: 0px 1px;
+								}
+								.clearfloat {
+									clear: both;
+									float: none;
+									display: block;
+								}
+								.logo {
+									width: 150px;
+									height: auto;
+									float: left;
+								}
+								.logo img {
+									width: 100%;
+								}
+								.logo-text {
+									margin: 0px 0px 0px 598px;
+									float: left;
+								}
+								.logo-text p {
+									margin: 5px 0px;
+								}
+								.header-col-02 p {
+									margin: 5px 0px;
+								}
+								.tower {
+									width: 100%;
+									float: left;
+									margin: 0px 0px 2px
+								}
+								.two-col-01, 
+								.two-col-02 {
+									width: 247.7px;
+									height: 55px;
+									border: 2px solid #000;
+									float: left;
+									margin: 1px 1px;
+									padding: 7px 10px;
+								}
+								.two-col-022 {
+									width: 24.76%;
+									height: 85px;
+									border: 2px solid #000;
+									float: left;
+									margin: 1px 1px;
+									padding: 7px 10px;
+								}
+								.tower p {
+									margin: 0px;
+								}
+								table {
+									width: 106%;
+									border-top: 2px solid #000;
+									margin: 20px 0px 0px;
+									float: left;
+								}
+								table tr th,
+								table tr td {
+									border-bottom: 2px solid #000;
+									border-left: 2px solid #000;
+									padding: 5px;
+									text-align: center;
+								}
+								table tr th:last-child,
+								table tr td:last-child {
+									border-right: 2px solid #000;
+								}
+								
+								.table-head {
+									text-align: center;
+									color: #FFF;
+									background: #666;
+								}
+								table table {
+									border: none;
+								}
+								table table tr td {
+									border: none !important;
+								}
+								.l_div{
+									text-align: left;
+									float: left;
+									text-weight: bold;
+									
+								}
+
+								.r_div{
+									text-align: right;
+									float: right;
+									text-weight: bold;
+								}
+
+								.h2{
+
+								text-align:center;
+								background-color:black;
+								color:white;
+								margin: 0px 0px 6px 0px;
+								}
+
+								.f2{
+
+								text-align:center;
+								width: 106%;
+								background-color:black;
+								color:white;
+								margin: 0px 0px 2px 0px;
+								}
+							</style>
+
+							<div class="main_header">
+
+								<div class="report-header">
+									
+									<div class="header-col-01">
+									   
+										<div class="logo">
+											<img src="/custom_invoice_arian/static/src/img/logo.jpg" alt="" />
+										</div>
+
+										<div class="logo-text">
+
+											<p><b>Arian Sports (Pvt) Ltd Customer</b></p>
+											<p><b>1Km off Naul More Roras Road</b></p>
+											<p><b>Sialkot Pakistan</b></p>
+											<b><p>Phone#:-92 52 3612 819</p>  
+											<p>E-Mail: export@ariansports.com</p></b>
+											
+										</div>
+
+									</div><!--end of header col 01-->
+
+								</div><!--end of header-->
+
+								<div class="tower">
+									<h2 class="h2">Purchase Order</h2>
+								   
+									<div class="two-col-022">
+
+										<p><span class="solid"><b>Vendor :</b></span>
+										<span t-esc ="o.partner_id.name"></span><br/>
+										<span t-esc ="o.partner_id.street"></span>  
+										<span t-esc ="o.partner_id.mobile"></span><br/>
+										<span t-esc ="o.partner_id.state_id.name"></span>  
+										<span t-esc ="o.partner_id.country_id.name"></span>
+
+									</p>
+
+									</div>
+									<div class="two-col-022">
+
+										<p><span class="solid"><b>P.O No:</b></span> <span class="liquid" t-esc ="o.name"></span></p>
+
+									</div>
+
+									<div class="two-col-022">
+
+										<p><span class="solid"><b>PO Date:</b></span> <span class="liquid" t-esc ="o.date_order"></span></p>
+
+									</div>
+									<div class="two-col-022">
+
+										<p><span class="solid"><b>Del. Date: </b></span>
+										<span t-esc ="o.date_planned"></span></p>
+
+									</div>
+									
+								</div>
+
+							</div><!--end of tower-->
+
+						   <table cellspacing='0'>
+
+								<tr>    
+									<th>Code</th>
+									<th>Description</th>
+									<th>Unit</th>
+									<th>Quantity</th>
+									<th>Rate</th>
+									<th>Total</th>
+									<th>Remarks</th>
+								</tr>
+								<t t-foreach="o.order_line" t-as="data">
+									<tr>
+										<td><span t-esc="data.product_id.internal_ref"></span></td>
+										<td><span t-esc="data.product_id.name"></span></td>
+										<td><span t-esc="data.product_id.uom.name"></span></td>
+										<td><span t-esc="data.product_qty"></span></td>
+										<td><span t-esc="data.price_unit"></span></td>
+										<td><span t-esc="data.product_qty*data.price_unit"></span></td>
+										<td><span></span></td>
+									</tr>
+								</t>
+
+							</table>
+						</div><!--end of page-->
+					</t>
+				</t>
+			</t>
+
+		</template>
+
+	</data>
+
+</openerp>

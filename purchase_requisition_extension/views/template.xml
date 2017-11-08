@@ -1,0 +1,156 @@
+<?xml version="1.0"?> 
+<odoo> 
+  
+    <template id="my_assets_id" name="website assets for my module" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/purchase_requisition_extension/static/src/css/custom.css"/>
+        </xpath>
+    </template>
+
+	<record id="purchase_requisition_extension_form_view" model="ir.ui.view">
+        <field name="name">purchase_requisition_extension_form_view</field>
+        <field name="model">purchase.requisition.extension</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+
+            <header>
+                <button name="wait" type="object" string="Waiting for Approval" class = "oe_highlight" attrs="{'invisible':['|','|',('state','=','send_approval'),('state','=','approve'),('state','=','wait')]}"/>
+
+                <button name="approve" type="object" string="Approved" class = "oe_highlight" attrs="{'invisible':['|','|',('state','=','draft'),('state','=','wait'),('state','=','approve')]}"/>
+
+                <button name="create_purchase_order" type="object" string="Create Purchase Order" class = " oe_highlight" attrs="{'invisible':['|','|',('state','=','draft'),('state','=','wait'),('state','=','send_approval')]}"/>
+
+                <button name="cancel" type="object" string="Cancel" class = "oe_highlight" attrs="{'invisible':['|','|',('state','=','draft'),('state','=','wait'),('state','=','approve')]}"/>
+
+                <button name="send" type="object" string="Send For Approval" class = "oe_highlight" attrs="{'invisible':['|','|',('state','=','approve'),('state','=','draft'),('state','=','send_approval')]}"/>
+
+                <field name="state" widget="statusbar" statusbar_visible="draft,wait,send_approval,approve" />
+            </header>
+
+            <div class="custom">
+                <form string="Purchase Requisition">
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="seq" string=""/>
+                            <h1><field name="seq" placeholder="PR No"/></h1>
+                        </div>
+                        <group name="group_top"> 
+                            <group name="left">
+                                <field name="mo_no" attrs="{'readonly':[('state','=','approve')]}"/>
+                                <field name="pr_no" attrs="{'readonly':[('state','=','approve')]}"/>
+                                <field name="pr_date" attrs="{'readonly':[('state','=','approve')]}"/>
+                            </group>
+                            <group name="right">
+                                <field name="app_doc_no" attrs="{'invisible':['|',('state','=','draft'),('state','=','wait')],'readonly':[('state','=','approve')]}"/>
+                                <field name="app_doc_date"  attrs="{'invisible':['|',('state','=','draft'),('state','=','wait')],'readonly':[('state','=','approve')]}" />
+                            </group>    
+
+                        </group>
+
+                        <field name="purchase_requisition_tree_link" attrs="{'readonly':[('state','=','approve')]}">
+                            <tree editable="bottom">
+                                <field name="material_id" />
+                                <field name="t_p" invisible="1"/>
+                                <field name="material_name" domain="[('purchase_ok','=','True')]"/>
+                               
+                                <field name="color"  domain="[('attribute_id.name','=','color'),('product_ids.product_tmpl_id.id','=',material_name)]"/>
+                                
+                                <field name="size" 
+                                    domain="[('attribute_id.name','=','size'),('product_ids.product_tmpl_id.id','=',material_name)]"/>
+                                <field name="uom" />
+                                <field name="required_quantity" />
+                                <field name="available_quantity" />
+                                <field name="balance_quantity" />
+                                <field name="qty_order" />
+                                <field name="qty_pr" />
+                                <field name="qty_rm" />
+                                <field name="qty_or" />
+                                <field name="vendor" domain="[('id','=',records[0][2])]"/>
+                                <field name="rate" />
+                                <field name="p_terms"/>
+                                <field name="remarks" />
+                                <field name="cmnt"/>
+                                <field name="records" widget="many2many_tags" invisible="1"/>
+                          </tree>
+                        </field>
+
+                    </sheet>
+
+                </form>
+            </div>
+        </field>
+    </record>
+               
+    <record id="GRN_form_view" model="ir.ui.view"> 
+            <field name="name">GRN_form_view</field> 
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="type">form</field> 
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name ='partner_id']" position="after">
+                    <field name="grn_date"/>
+                    <field name="Req_dep"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name ='origin']" position="after">
+                    <field name="sgp_no"/>
+                    <field name="veh_no"/>
+                    <field name="driver_name"/>
+
+                </xpath>
+
+
+                 <xpath expr='//field[@name="pack_operation_product_ids"]/tree//field[@name="product_id"]' position="after">
+                      <field name="prod_id"/>
+                      <field name="uom"/>
+                </xpath>
+
+                <xpath expr='//field[@name="pack_operation_product_ids"]/tree//field[@name="qty_done"]' position="after">
+                      <field name="remain_qty"/>
+                      <field name="reject"/>
+                      <field name="lot_no"/>
+                      <field name="remarks"/>
+                </xpath>
+
+
+                <xpath expr='//field[@name="pack_operation_product_ids"]/tree//field[@name="product_qty"]' position="after">
+                      <field name="rcv_qty"/>
+                </xpath>
+
+            </field>
+    </record>
+
+    <record id="purchase_requisition_list_view" model="ir.ui.view">
+        <field name="name">purchase_requisition_list_view</field>
+        <field name="model">purchase.requisition.extension</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Requisition">
+                    <field name="mo_no" />
+                    <field name="pr_no" />
+                    <field name="pr_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="purchase_requisition_seq" model="ir.sequence"> 
+        <field name="name">purchase_requisition_seq</field> 
+        <field name="code">pr.seq</field> 
+        <field name="prefix">PR  </field> 
+        <field name="padding"> 4</field> 
+    </record>
+
+ 	<record model="ir.actions.act_window" id="purchase_requisition_action">
+        <field name="name">Purchase Requisition</field>
+        <field name="res_model">purchase.requisition.extension</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+  	<menuitem name="Purchase Requisition" id="purchase_requisition_menu_item" parent="purchase.menu_purchase_root" sequence="3"/>
+
+    <menuitem name="Purchase Requisition" id="purchase_requisition_menu" parent="purchase_requisition_menu_item" action="purchase_requisition_action" sequence="1"/>
+
+</odoo> 

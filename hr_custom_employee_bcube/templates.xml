@@ -1,0 +1,654 @@
+<?xml version="1.0"?> 
+<odoo> 
+    <data>
+        <!-- Employees -->
+        <record id="hr_extension_form_view" model="ir.ui.view">
+            <field name="name">hr.extension.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <!-- Public Information -->
+                    <field name="mobile_phone" position="after">
+                        <field name="office"/>
+                        <field name="work_fax"/>
+                        <field name="laptop_des"/>
+                        <field name="serial_num"/>
+                    </field>
+                    <xpath expr="//field[@name='work_location']" position="attributes">
+
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <field name="department_id" position="after">
+
+                        <field name="grade"/>
+                    </field>
+                    <field name="job_id" position="after">
+                        <field name="head"/>
+                        <field name="line_man"/>
+                        <field name="is_head"/>
+                        <field name="performence_manager"/>
+                        <field name="is_line_man"/>
+                    </field>
+                    <xpath expr="//field[@name='parent_id']" position="attributes">
+
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='coach_id']" position="attributes">
+
+                        <attribute name="invisible">True</attribute>
+                    </xpath>
+                <xpath expr="//page" position="after">
+                    <!-- Dependent -->
+                        <page string="Dependent" name="employee_dependent">
+                            <field name="dependent_id">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="dob"/>
+                                    <field name="relation"/> 
+                                    <field name="nationality"/> 
+                                </tree>
+                            </field>
+                        </page>
+                    <!-- Education and Experience -->
+                        <page string="Education and Experience" name="employee_education">
+                            <group name="qualifiction" string="Qualifications">
+                            </group>
+                            <field name="qualifiction_id">
+                                <tree string='Qualifications'>
+                                    <field name="uni_name"/> 
+                                    <field name="prg_status"/>
+                                    <field name="comp_date"/> 
+                                    <field name="contact_name"/> 
+                                    <field name="contact_phn"/> 
+                                    <field name="contact_email"/> 
+                                </tree>
+                            </field>
+                            <group name="certification" string="Certification">
+                            </group>
+                            <field name="certification_id">
+                                <tree string='Certification'>
+                                    <field name="car_name"/>
+                                    <field name="issue_org"/>
+                                    <field name="issue_date"/> 
+                                    <field name="exp_date"/>
+                                    <field name="regis_no"/>
+                                    <field name="contact_name"/> 
+                                    <field name="contact_phn"/> 
+                                    <field name="contact_email"/> 
+                                </tree>  
+                            </field>
+                        </page>
+                    <!-- Insurance -->
+                        <page string="Insurance" name="employee_insurance">
+                            <field name="insurance_id">
+                                <tree>
+                                    <field name="card_code"/>
+                                    <field name="member_name"/>
+                                    <field name="clas_n"/> 
+                                    <field name="gender"/> 
+                                    <field name="dob"/> 
+                                    <field name="relation"/> 
+                                    <field name="sponsor_id"/> 
+                                    <field name="job"/> 
+                                    <field name="premium"/> 
+                                    <field name="start_date"/> 
+                                    <field name="expiry_date"/> 
+                                </tree>  
+                            </field>
+                        </page>
+                    <!-- Training -->
+                        <page string="Training" name="employee_training">
+                            <field name="trainings_id">
+                                <tree>
+                                    <field name="training_sum"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/> 
+                                    <field name="type_training"/> 
+                                    <field name="training_company"/> 
+                                    <field name="training_place"/> 
+                                    <field name="status"/>  
+                                </tree>  
+                            </field>
+                        </page>
+                    <!-- Documents -->
+                        <page string="Documents" name="employee_documents">
+                            <field name="documents_id">
+                                <tree>
+                                    <field name="type_d"/>
+                                    <field name="number"/>
+                                    <field name="profession"/> 
+                                    <field name="issue_date"/> 
+                                    <field name="expiry_date"/> 
+                                    <field name="date_hijri"/> 
+                                    <field name="place_issue"/>  
+                                    <field name="notes"/> 
+                                </tree>  
+                            </field>
+                        </page>
+                </xpath>
+                <!-- Personal Information -->
+                    <field name="country_id" position="after">
+                        <field name="name_as_pass"/>
+                        <field name="iqama_num"/>
+                        <field name="religion"/>
+                        <field name="arabic_name"/>
+                        <field name="employee_code"/>
+                        <field name="gosi_no"/>
+                    </field>
+                    <field name="address_home_id" position="after">
+                        <field name="spouse_no"/>
+                        <field name="address_ksa"/>
+                    </field>
+                <!-- HR settings -->
+                    <field name="user_id" position="after">
+                        <field name="vendor_no"/>
+                        <field name="vehiclee" widget="many2many_tags"/>
+                        <field name="project"/>
+                        <field name="mol_no"/>
+                        <field name="iban"/>
+                        <field name="bank_code"/>
+                        <group string='Employment'>
+                            <field name="joining_date"/>
+                            <field name="leaving_date"/>
+                            <field name="serv_year"/>
+                            <field name="emp_status"/>
+                        </group>
+                    </field>
+            </field>
+        </record> -->
+
+        <!-- Dependent-->
+        <record id="dependent_form_view" model="ir.ui.view">
+            <field name="name">hr.dependent.form.view</field>
+            <field name="model">hr.dependent</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="employee"/>
+                        </group>
+                        <group></group>
+                        <group string='Personal Information'>
+                            <field name="name"/>
+                            <field name="arabic_name"/>
+                            <field name="dob"/>
+                            <field name="nationality"/>
+                            <field name="relation"/>
+                            <field name="religion"/>
+                        </group>
+                        <group string='Iqama Details'>
+                            <field name="iqama_num"/>
+                            <field name="serial_num"/>
+                            <field name="date_issue"/>
+                            <field name="date_expiry"/>
+                            <field name="issue_place"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Dependent-->
+        <record id="dependent_tree_view" model="ir.ui.view">
+            <field name="name">hr.dependent.tree.view</field>
+            <field name="model">hr.dependent</field>
+            <field name="arch" type="xml">
+                <tree string='Personal Information'>
+                    <field name="employee"/>
+                    <field name="name"/>
+                    <field name="arabic_name"/>
+                    <field name="dob"/>
+                    <field name="nationality"/>
+                    <field name="relation"/>
+                    <field name="religion"/>
+                    <field name="iqama_num"/>
+                    <field name="serial_num"/>
+                    <field name="date_issue"/>
+                    <field name="date_expiry"/>
+                    <field name="issue_place"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Employee Card-->
+        <record id="cards_form_view" model="ir.ui.view">
+            <field name="name">hr.cards.form.view</field>
+            <field name="model">employee.card</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string='Employee Information'>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                            <field name="department"/>
+                            <field name="job_title"/>
+                            <field name="office"/>
+                        </group>
+                        <group string='Card Information'>
+                            <field name="card_type"/>
+                            <field name="card_no"/>
+                            <field name="requested_date"/>
+                            <field name="reason"/>
+                            <field name="status"/>
+                            <field name="access_type"/>
+                            <field name="period_stay"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Employee Amedment -->
+        <record id="amedment_form_view" model="ir.ui.view" >
+            <field name="name">hr.amedment.form.view</field>
+            <field name="model">contract.amedment</field>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="/form/*" position="before">
+                    <header>
+                        <button name="validate_changes" type="object" string="Update" class = "oe_highlight" />
+                    </header>
+                </xpath> -->
+                <form>
+                    <group>
+                        <group string='Employee Information'>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                        </group>
+                        <group string='Contract Information'>
+                            <field name="contract"/>
+                            <field name="effective_date"/>
+                        </group>
+                        <group string='From'>
+                            <field name="office"/>
+                            <field name="department"/>
+                            <field name="grade"/>
+                            <field name="job"/>
+                        </group>
+                        <group string='To'>
+                            <field name="to_office"/>
+                            <field name="to_department"/>
+                            <field name="to_grade"/>
+                            <field name="to_job"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!--Employee Iqama -->
+        <record model="ir.ui.view" id="iqama_form_view">
+            <field name="name">hr.iqama.form.view</field>
+            <field name="model">employee.iqama</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string='Iqama Type'>
+                            <field name="type_iqama"/>
+                        </group>
+                        <group></group>
+                    </group>
+                    <group>
+                        <group string='Employee Details'>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                            <field name="job"/>
+                            <field name="department"/>
+                            <field name="office"/>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="arabic_name"/>
+                            <field name="nationality"/>
+                            <field name="relegion"/>
+                            <field name="dob"/>
+                            <field name="profession"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string='Iqama Details'>
+                            <field name="iqama_no"/>
+                            <field name="serial_no"/>
+                            <field name="iqama_position"/>
+                            <field name="place_issue"/>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="date_hijri"/>
+                            <field name="arrival_date"/>
+                            <field name="in_saudi"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Employee Clearance -->
+        <record model="ir.ui.view" id="clearance_form_view">
+            <field name="name">hr.clearance.form.view</field>
+            <field name="model">employee.clearance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string='Employee Details'>
+                        </group>
+                        <group></group>
+                        <group>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                            <field name="department"/>
+                            <field name="office"/>
+                            <field name="email"/>
+                            <field name="contact_phone"/>
+                        </group>
+                        <group>
+                            <field name="seniority_date"/>
+                            <field name="res_date"/>
+                            <field name="last_country_day"/>
+                            <field name="last_day_work"/>
+                            <field name="letter_to_client"/>
+                        </group>
+                    </group>
+                    <field name="it_department">
+                        <tree>
+                            <field name="item"/>
+                            <field name="status"/>
+                            <field name="handled_by"/>
+                            <field name="remarks"/>
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <!-- Employee Gosi -->
+        <record model="ir.ui.view" id="grops_form_view">
+            <field name="name">hr.grops.form.view</field>
+            <field name="model">employee.grops</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string='Employee Details'>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                            <field name="department"/>
+                            <field name="office"/>
+                            <field name="passport_no"/>
+                            <field name="nationality"/>
+                        </group>
+                        <group string='Gosi Details'>
+                            <field name="type_d"/>
+                            <field name="iqama_no"/>
+                            <field name="issue_date"/>
+                            <field name="dob"/>
+                            <field name="dob_hijri"/>
+                            <field name="gosi_no"/>
+                        </group>
+                    </group>
+                    <field name="grops_id">
+                        <tree>
+                            <field name="payslip"/>
+                            <field name="date"/>
+                            <field name="gosi_ammount"/>
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+
+        <!-- Employee Leaving -->
+        <record model="ir.ui.view" id="leaving_form_view">
+            <field name="name">hr.leaving.form.view</field>
+            <field name="model">eos.leaving</field>
+            <field name="arch" type="xml">
+
+                <!-- <xpath expr="/form/*" position="before">
+                    <header>
+                        <button name="create_emp_clearence" type="object" string="In Progress" class = "oe_highlight" />
+                    </header>
+                </xpath> -->
+                <form>
+                    <group>
+                        <group string='Employee Information'>
+                            <field name="employee"/>
+                            <field name="employee_code"/>
+                            <field name="department"/>
+                            <field name="office"/>
+                            <field name="employee_clearence_ref"/>
+                        </group>
+                        <group string='Leaving Information'>
+                            <field name="reason"/>
+                            <field name="requested_date"/>
+                            <field name="notice_date"/>
+                            <field name="end_date"/>
+                            <field name="interview_date"/>
+                            <field name="contact_person"/>
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Description" name="employee_leaving">
+                                <field name="description"/>
+                            </page>  
+                            <page string="Extra Information" name="employee_Leavingextra">
+                            </page>
+                        </notebook>
+                    </group>  
+                </form>
+            </field>
+        </record>
+
+        <!-- EOS-->
+        <record model="ir.ui.view" id="eos_form_view">
+            <field name="name">hr.eos.form.view</field>
+            <field name="model">employee.eos</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group string='Employee Details'>
+                            <field name="employee"/>
+                            <field name="department"/>
+                            <field name="job"/>
+                            <field name="contract"/>
+                        </group>
+                        <group>
+                            <field name="joining_date"/>
+                            <field name="leaving_date"/>
+                            <field name="employee_code"/>
+                            <field name="currency"/>
+                            <field name="year"/>
+                        </group>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="EOS Details" name="employee_eos">
+                                <group>
+                                     <group>
+                                        <field name="date"/>
+                                        <field name="type_d"/>
+                                        <field name="payslip"/>
+                                        <field name="remaining_leave"/>
+                                        <field name="no_year"/>
+                                        <field name="no_month"/>
+                                        <field name="no_days"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_award"/>
+                                        <field name="leave_balance"/>
+                                        <field name="salary"/>
+                                        <field name="others"/>
+                                        <field name="total_amount"/>
+                                    </group>
+                                </group>
+                            </page>  
+                            <page string="Accounting" name="employee_accounting">
+                            </page>
+                            <page string="Extra Information" name="employee_accounting">
+                            </page>
+                        </notebook>
+                    </group>  
+                </form>
+            </field>
+        </record>
+
+        <!-- Contracts -->
+        <record id="hr_contract_form_view" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page" position="before">
+                    <page string="Allowances" name="employee_allowances">
+                        <group>
+                            <group>
+                                <field name="allow_mbl"/>
+                                <field name="sign_bonous"/>
+                                <field name="loan_allow"/>
+                                <field name="incentive"/>
+                                <field name="expense_claim"/>
+                                <field name="hr_visa_ticket"/>
+                                <field name="other_allowances"/>
+                            </group>
+                            <group>
+                                <field name="air_allow"/>
+                                <field name="adults"/>
+                                <field name="children"/>
+                                <field name="infants"/>
+                                <field name="vac_des"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page" position="before">
+                    <page string="Deductions" name="employee_deductions">
+                        <group>
+                            <group>
+                                <field name="advance_salary"/>
+                                <field name="hr_expense"/>
+                                <field name="cash_sales"/>
+                                <field name="traffic_fine"/>
+                                <field name="bk_balance"/>
+                                <field name="other_deductions"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <field name="employee_id" position="after">
+                    <field name="employee_code"/>
+                    <field name="package"/>
+                    <field name="gosi"/>
+                </field>
+                <field name="type_id" position="after">
+                    <field name="vehicle_attendance"/>
+                    <field name="system_attendance"/>
+                    <field name="line_manager_attendance"/>
+                </field> 
+            </field>
+        </record>
+
+        <!-- Document Type -->
+        <record model="ir.ui.view" id="document_types_form_view">
+            <field name="name">hr.document.type.form.view</field>
+            <field name="model">documents.typed</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="type_c"/>
+                    </group>
+                </form>
+            </field>
+        </record> 
+
+        <!-- Dependent -->
+        <record model="ir.actions.act_window" id="dependent_list_action">
+            <field name="name">Dependent</field>
+            <field name="res_model">hr.dependent</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee Card -->
+        <record model="ir.actions.act_window" id="card_list_action">
+            <field name="name">Employee Cards</field>
+            <field name="res_model">employee.card</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee Amedment-->
+        <record model="ir.actions.act_window" id="amedment_list_action">
+            <field name="name">Employee Amedment</field>
+            <field name="res_model">contract.amedment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee Iqama -->
+        <record model="ir.actions.act_window" id="iqama_list_action">
+            <field name="name">Employee Iqama</field>
+            <field name="res_model">employee.iqama</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee Clearance-->
+        <record model="ir.actions.act_window" id="it_department_list_action">
+            <field name="name">Employee Clearance</field>
+            <field name="res_model">employee.clearance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee GOSI-->
+        <record model="ir.actions.act_window" id="grops_list_action">
+            <field name="name">Employee GOSI</field>
+            <field name="res_model">employee.grops</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Employee Leaving-->
+        <record model="ir.actions.act_window" id="leaving_list_action">
+            <field name="name">Employee Leaving</field>
+            <field name="res_model">eos.leaving</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- EOS-->
+        <record model="ir.actions.act_window" id="eos_list_action">
+            <field name="name">EOS</field>
+            <field name="res_model">employee.eos</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Dependent -->
+        <menuitem id="ddependent_menu" name="Dependent"
+              parent="hr.menu_hr_main"
+              action="dependent_list_action"/>
+        <!-- Employee Card -->
+        <menuitem id="cards_menu" name="Employee Cards"
+              parent="hr.menu_hr_main"
+              action="card_list_action"/>
+        <!-- Employee Amedment -->
+        <menuitem id="contract_amedment_menu" name="Employee Amendment"
+              parent="hr.menu_hr_main"
+              action="amedment_list_action"/>
+        <!-- Employee Iqama -->
+        <menuitem id="contract_iqama_menu" name="Employee Iqama"
+              parent="hr.menu_hr_main"
+              action="iqama_list_action"/>
+        <!-- Employee Clearance -->
+        <menuitem id="employee_clearance_menu" name="Employee Clearance"
+              parent="hr.menu_hr_main"
+              action="it_department_list_action"/>
+        <!-- Employee GOSI -->
+        <menuitem id="employee_grops_menu" name="Employee GOSI"
+              parent="hr.menu_hr_main"
+              action="grops_list_action"/>
+        <!-- Employee Leaving -->
+        <menuitem id="employee_leaving_menu" name="Employee Leaving"
+              parent="hr.menu_hr_main"
+              action="leaving_list_action"/>
+        <!-- EOS -->
+        <menuitem id="employee_eos_menu" name="EOS"
+              parent="hr.menu_hr_main"
+              action="eos_list_action"/>
+
+    </data>
+</odoo>
